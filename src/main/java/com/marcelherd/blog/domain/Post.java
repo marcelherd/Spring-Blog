@@ -4,9 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Marcel Herd
@@ -31,12 +29,13 @@ public class Post {
     @NotNull
     private Date createdAt;
 
-    @OneToMany
+    //TODO: fix cascading
+    @OneToMany(cascade = CascadeType.ALL )
     @JoinColumn
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<Comment>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<Tag>();
 
 }

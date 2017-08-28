@@ -14,6 +14,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Tag {
 
+    public Tag() { }
+    public Tag(String name) { this.name = name; }
+
     @Id
     @GeneratedValue
     private Long id;

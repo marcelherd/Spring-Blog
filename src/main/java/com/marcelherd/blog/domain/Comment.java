@@ -1,9 +1,11 @@
 package com.marcelherd.blog.domain;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Comment {
     @NotNull
     private String name;
 
+    @Email
     private String email;
 
     @NotNull
@@ -32,8 +35,9 @@ public class Comment {
     @NotNull
     private Date createdAt;
 
-    @OneToMany
+    //TODO: fix cascading
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<Comment>();
 
 }
